@@ -53,7 +53,7 @@ const generateTemplate = (content: string) => {
   
         .body {
           color: white;
-          padding: 20px;
+          padding: 5px;
           font-size: 28px;
         }
       </style>

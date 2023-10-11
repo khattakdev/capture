@@ -29,7 +29,10 @@ export function activate(context: vscode.ExtensionContext) {
 
         const content = generateTemplate(text);
         await page.setContent(content);
-        const imageBuffer = await page.screenshot();
+
+        const imageBuffer = await page.screenshot({
+          fullPage: true,
+        });
 
         const fileUri = await vscode.window.showSaveDialog({
           filters: {
