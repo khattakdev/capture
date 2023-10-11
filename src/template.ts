@@ -1,3 +1,10 @@
+const handleMultiLines = (content: string) => {
+  const lines = content.split("\n");
+  const joinLines = lines.map((line) => `<pre><code>${line}</code></pre>`);
+  const htmlContent = joinLines.join("");
+  return htmlContent;
+};
+
 const generateTemplate = (content: string) => {
   return `
     <html lang="en">
@@ -60,7 +67,7 @@ const generateTemplate = (content: string) => {
         </div>
       </div>
       <div class="body">
-        ${content}
+           ${handleMultiLines(content)}
       </div>
     </body>
   </html>`;

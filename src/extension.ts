@@ -36,7 +36,7 @@ export function activate(context: vscode.ExtensionContext) {
             // eslint-disable-next-line @typescript-eslint/naming-convention
             Images: ["png"],
           },
-          saveLabel: "save Images",
+          saveLabel: "Save Image",
           title: "Save Code Snippet Image",
         });
 
