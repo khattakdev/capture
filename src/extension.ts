@@ -27,9 +27,8 @@ export function activate(context: vscode.ExtensionContext) {
         const browser = await puppeteer.launch();
         const page = await browser.newPage();
 
-        const content = generateTemplate(text);
+        const content = await generateTemplate(text);
         await page.setContent(content);
-
         const imageBuffer = await page.screenshot({
           fullPage: true,
         });

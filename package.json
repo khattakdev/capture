@@ -41,6 +41,7 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
-    "puppeteer": "^21.3.8"
+    "puppeteer": "^21.3.8",
+    "shiki": "^0.14.5"
   }
 }

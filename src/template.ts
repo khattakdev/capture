@@ -1,14 +1,18 @@
-const handleMultiLines = (content: string) => {
-  const lines = content.split("\n");
-  const joinLines = lines.map((line) => `<pre><code>${line}</code></pre>`);
-  const htmlContent = joinLines.join("");
-  return htmlContent;
-};
+const shiki = require("shiki");
 
-const generateTemplate = (content: string) => {
+const highlightCode = async (content: string) => {
+  const highlighter = await shiki.getHighlighter({
+    theme: "one-dark-pro", // You can specify other themes like 'dark-plus', 'light-plus', etc.
+  });
+
+  const htmlContent = highlighter.codeToHtml(content, "javascript");
+  return await htmlContent;
+};
+const generateTemplate = async (content: string) => {
   return `
     <html lang="en">
     <head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/themes/prism.css" rel="stylesheet" />
       <style>
         body {
           background: #282c33;
@@ -67,8 +71,9 @@ const generateTemplate = (content: string) => {
         </div>
       </div>
       <div class="body">
-           ${handleMultiLines(content)}
+           ${await highlightCode(content)}
       </div>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/prism.js"></script>
     </body>
   </html>`;
 };
