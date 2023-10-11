@@ -2,8 +2,8 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from "vscode";
 import * as fs from "fs";
-const puppeteer = require("puppeteer");
-// import * as puppeteer from "puppeteer";
+import * as puppeteer from "puppeteer";
+import generateTemplate from "./template";
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -18,35 +18,42 @@ export function activate(context: vscode.ExtensionContext) {
   let disposable = vscode.commands.registerCommand(
     "capture.snapshot",
     async () => {
+      const editor = vscode.window.activeTextEditor;
+      if (editor) {
+        const document = editor.document;
+        const selection = editor.selection;
+        const text = document.getText(selection);
+
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage();
+
+        const content = generateTemplate(text);
+        await page.setContent(content);
+        const imageBuffer = await page.screenshot();
+
+        const fileUri = await vscode.window.showSaveDialog({
+          filters: {
+            // eslint-disable-next-line @typescript-eslint/naming-convention
+            Images: ["png"],
+          },
+          saveLabel: "save Images",
+          title: "Save Code Snippet Image",
+        });
+
+        if (fileUri) {
+          fs.writeFile(fileUri.fsPath, imageBuffer, (err) => {
+            if (err) {
+              vscode.window.showErrorMessage("Failed to save imaged!");
+            } else {
+              vscode.window.showInformationMessage("Image saved!");
+            }
+          });
+        }
+        await browser.close();
+        vscode.window.showInformationMessage("Snapshot taken!");
+      }
       // The code you place here will be executed every time your command is executed
       // Display a message box to the user
-      const browser = await puppeteer.launch();
-      const page = await browser.newPage();
-
-      await page.setContent(
-        `<pre><code>const i = "Hello World!";</code></pre>`
-      );
-      const imageBuffer = await page.screenshot();
-
-      const fileUri = await vscode.window.showSaveDialog({
-        filters: {
-          Images: ["png"],
-        },
-        saveLabel: "save Images",
-        title: "Save Code Snippet Image",
-      });
-
-      if (fileUri) {
-        fs.writeFile(fileUri.fsPath, imageBuffer, (err) => {
-          if (err) {
-            vscode.window.showErrorMessage("Failed to save imaged!");
-          } else {
-            vscode.window.showInformationMessage("Image saved!");
-          }
-        });
-      }
-      await browser.close();
-      vscode.window.showInformationMessage("Snapshot taken!");
     }
   );
 

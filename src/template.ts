@@ -1,5 +1,6 @@
-export const template = `
-<html lang="en">
+const generateTemplate = (content: string) => {
+  return `
+    <html lang="en">
     <head>
       <style>
         body {
@@ -59,9 +60,10 @@ export const template = `
         </div>
       </div>
       <div class="body">
-      const img = "YAY! a new image!";</div>
+        ${content}
+      </div>
     </body>
-  </html>
-  `;
+  </html>`;
+};
 
-// export default template;
+export default generateTemplate;
