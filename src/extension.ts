@@ -29,6 +29,12 @@ export function activate(context: vscode.ExtensionContext) {
 
         const content = await generateTemplate(text);
         await page.setContent(content);
+        const contentHeight = content.split("\n").length;
+        const totalHeight = contentHeight * 3;
+        await page.setViewport({
+          width: 800,
+          height: totalHeight + 50,
+        });
         const imageBuffer = await page.screenshot({
           fullPage: true,
         });
@@ -52,7 +58,7 @@ export function activate(context: vscode.ExtensionContext) {
           });
         }
         await browser.close();
-        vscode.window.showInformationMessage("Snapshot taken!");
+        // vscode.window.showInformationMessage("Snapshot taken!");
       }
       // The code you place here will be executed every time your command is executed
       // Display a message box to the user

@@ -8,16 +8,19 @@ const highlightCode = async (content: string) => {
   const htmlContent = highlighter.codeToHtml(content, "javascript");
   return await htmlContent;
 };
+
 const generateTemplate = async (content: string) => {
   return `
     <html lang="en">
     <head>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/themes/prism.css" rel="stylesheet" />
       <style>
+
         body {
           background: #282c33;
           padding: 0px;
           margin: 0px;
+          font-family: 'Cascadia Code PL', sans-serif;
         }
   
         .header {
@@ -59,6 +62,7 @@ const generateTemplate = async (content: string) => {
           color: white;
           padding: 5px;
           font-size: 28px;
+          height: 30px;
         }
       </style>
     </head>
