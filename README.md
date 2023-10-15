@@ -1,6 +1,7 @@
 # Capture
 
 A VS Code plugin that generates a screenshot of the highlighted content.
+![demo - how to capture](/assets/preview.gif)
 
 # Getting Started
 
