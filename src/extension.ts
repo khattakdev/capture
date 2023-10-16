@@ -4,6 +4,7 @@ import * as vscode from "vscode";
 import * as fs from "fs";
 import * as puppeteer from "puppeteer";
 import generateTemplate from "./template";
+const { copyImg } = require('img-clipboard');
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -53,7 +54,8 @@ export function activate(context: vscode.ExtensionContext) {
             if (err) {
               vscode.window.showErrorMessage("Failed to save imaged!");
             } else {
-              vscode.window.showInformationMessage("Image saved!");
+              copyImg(fileUri.fsPath);
+              vscode.window.showInformationMessage("Image saved and Copied to Clipboard!");
             }
           });
         }

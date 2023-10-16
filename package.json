@@ -49,6 +49,7 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
+    "img-clipboard": "^1.1.0",
     "puppeteer": "^21.3.8",
     "shiki": "^0.14.5"
   }
