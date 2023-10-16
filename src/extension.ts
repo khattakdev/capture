@@ -24,6 +24,11 @@ export function activate(context: vscode.ExtensionContext) {
         const selection = editor.selection;
         const text = document.getText(selection);
 
+        if (text.trim() === "") {
+          vscode.window.showErrorMessage("YOU HAVE NOT HIGHLIGHTED ANYTHING.");
+          return;
+        } 
+        
         const browser = await puppeteer.launch();
         const page = await browser.newPage();
 
