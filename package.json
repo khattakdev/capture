@@ -24,7 +24,8 @@
       {
           "command": "capture.snapshot",
           "key": "ctrl+alt+p",  
-          "mac": "cmd+alt+p"    
+          "mac": "cmd+alt+p",
+          "when": "editorHasSelection"   
       }
     ]
   },
