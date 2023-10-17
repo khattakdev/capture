@@ -33,7 +33,25 @@ Scan through our [existing issues](https://github.com/khattakdev/capture/issues)
 
 #### Make changes in a codespace
 
-Make your code changes on this branch. Ensure your changes adhere to our coding guidelines. 
+To access GitHub Codespaces for the repository, follow these steps:
+
+1. Navigate to your repository on GitHub.
+
+2. Click on the "Code" button located at the top right of the repository page.
+
+3. Select "Open with Codespaces" from the dropdown menu.
+
+4. If you're using Codespaces for the first time, you might need to set up your Codespaces environment. Follow the on-screen instructions to configure your environment.
+
+Once you have configured your environment, you can start making changes to your GitHub repository using Codespaces. Here's what you can do:
+
+1. Edit Files: Open and edit files in the web-based Codespaces environment. You can use a built-in code editor (VS Code) or other tools.
+
+2. Run Commands: Execute commands in the integrated terminal to build, test, or run your project.
+
+3. Version Control: Use Git commands to manage your changes. You can commit, create branches, and push your commits directly to your GitHub repository. Codespaces also integrates with GitHub Pull Requests, allowing you to create and review pull requests from within the environment.
+
+4. Real-Time Collaboration: If you're working on a collaborative project, multiple users can access and work on the same Codespaces environment simultaneously, making real-time collaboration easy.
 
 #### Make changes locally
 
