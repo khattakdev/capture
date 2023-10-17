@@ -19,7 +19,18 @@
         "command": "capture.snapshot",
         "title": "Capture: Take a snapshot"
       }
-    ]
+    ],
+     "configuration": [{
+        "title": "Capture settings",
+        "properties": {
+            "capture.themeName": {
+                "type": "string",
+                "default": "one-dark-pro",
+                "description": "The theme to use.",
+                "enum": ["dark-plus","dracula-soft","dracula","github-dark-dimmed","github-dark","github-light","hc-light","light-plus","material-theme-darker","material-theme-lighter","material-theme-ocean","material-theme","min-dark","min-light","monokai","nord","one-dark-pro","poimandres","rose-pine-dane","rose-pine","slack-dark","slack-ochin","solarized-dark","solarized-light","vitesse-dark","vitesse-light"]
+            }
+        }
+    }]
   },
   "repository": {
     "type": "git",
