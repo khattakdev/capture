@@ -32,7 +32,10 @@ export function activate(context: vscode.ExtensionContext) {
         const browser = await puppeteer.launch();
         const page = await browser.newPage();
 
-        const content = await generateTemplate(text);
+        const configuration = vscode.workspace.getConfiguration('capture');
+        const themeName = configuration.get('themeName', 'one-dark-pro');
+
+        const content = await generateTemplate(text,themeName);
         await page.setContent(content);
         const contentHeight = content.split("\n").length;
         const totalHeight = contentHeight * 3;
