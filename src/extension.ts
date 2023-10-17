@@ -25,7 +25,7 @@ export function activate(context: vscode.ExtensionContext) {
         const text = document.getText(selection);
 
         if (text.trim() === "") {
-          vscode.window.showErrorMessage("YOU HAVE NOT HIGHLIGHTED ANYTHING.");
+          vscode.window.showErrorMessage("You have not highlighted anything.");
           return;
         } 
         
