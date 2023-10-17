@@ -19,6 +19,14 @@
         "command": "capture.snapshot",
         "title": "Capture: Take a snapshot"
       }
+    ],
+    "keybindings": [
+      {
+          "command": "capture.snapshot",
+          "key": "ctrl+alt+p",  
+          "mac": "cmd+alt+p",
+          "when": "editorHasSelection"   
+      }
     ]
   },
   "repository": {

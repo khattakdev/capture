@@ -25,6 +25,12 @@ export function activate(context: vscode.ExtensionContext) {
       const browser = await puppeteer.launch();
       const page = await browser.newPage();
 
+      if (text.trim() === "") {
+        vscode.window.showErrorMessage("You have not highlighted anything.");
+        return;
+      } 
+        
+
       const content = await generateTemplate(text);
       await page.setContent(content);
       const contentHeight = content.split("\n").length;
