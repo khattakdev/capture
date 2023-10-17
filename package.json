@@ -35,7 +35,7 @@
                 "type": "string",
                 "default": "one-dark-pro",
                 "description": "The theme to use.",
-                "enum": ["dark-plus","dracula-soft","dracula","github-dark-dimmed","github-dark","github-light","hc-light","light-plus","material-theme-darker","material-theme-lighter","material-theme-ocean","material-theme","min-dark","min-light","monokai","nord","one-dark-pro","poimandres","rose-pine-dane","rose-pine","slack-dark","slack-ochin","solarized-dark","solarized-light","vitesse-dark","vitesse-light"]
+                "enum": ["dark-plus","dracula-soft","dracula","github-dark-dimmed","github-dark","github-light","hc_light","light-plus","material-theme-darker","material-theme-lighter","material-theme-ocean","material-theme","material-theme-palenight","min-dark","min-light","monokai","nord","one-dark-pro","poimandres","rose-pine-dane","rose-pine","slack-dark","slack-ochin","solarized-dark","solarized-light","vitesse-dark","vitesse-light","rose-pine-dawn","rose-pine-moon","css-variables"]
             }
         }
     }]
