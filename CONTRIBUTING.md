@@ -55,17 +55,16 @@ Once you have configured your environment, you can start making changes to your 
 
 #### Make changes locally
 
-1. Fork the repository.
-- Using GitHub Desktop:
+Fork the repository.
+- **Using GitHub Desktop**:
   - [Getting started with GitHub Desktop](https://docs.github.com/en/desktop/installing-and-configuring-github-desktop/getting-started-with-github-desktop) will guide you through setting up Desktop.
   - Once Desktop is set up, you can use it to [fork the repo](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/cloning-and-forking-repositories-from-github-desktop)!
 
-- Using the command line:
-  - Fork the repo so that you can make your changes without affecting the original project until you're ready to merge them.
-
-2. Install or update to **Node.js**, at the version specified in `.node-version`. For more information, see the development guide.
-
-3. Create a working branch and start with your changes!
+- **Using the command line**:
+  - To set up a working development environment, just fork the project git repository.
+  - Open your terminal and navigate to the directory where you want to  store the project. Then, run the following command to clone the repository: git clone https://github.com/yourusername/capture.git
+  - Navigate into the project directory: `cd capture`
+  - Use npm to install the project's dependencies: `npm install`
 
 ### Commit your update
 
