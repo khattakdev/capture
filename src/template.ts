@@ -1,19 +1,19 @@
 const shiki = require("shiki");
 
-const highlightCode = async (content: string,themeName: string) => {
+const highlightCode = async (themeName: string) => {
   const highlighter = await shiki.getHighlighter({
     theme: themeName, // You can specify other themes like 'dark-plus', 'light-plus', etc.
   });
 
-  const htmlContent = highlighter.codeToHtml(content, "javascript");
-  return await htmlContent;
+  return await highlighter;
 };
 
 const generateTemplate = async (content: string, themeName: string) => {
-  // get background color from the theme.
-  const highlighter = await shiki.getHighlighter({
-    theme: themeName,
-  });
+  // get hightlighter
+  const highlighter = await highlightCode(themeName);
+  // set content 
+  const htmlContent = highlighter.codeToHtml(content, "javascript");
+  // get theme background color
   const backgroundClr = highlighter.getBackgroundColor();
   
   return `
@@ -81,7 +81,7 @@ const generateTemplate = async (content: string, themeName: string) => {
         </div>
       </div>
       <div class="body">
-           ${await highlightCode(content,themeName)}
+           ${htmlContent}
       </div>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/prism.js"></script>
     </body>
