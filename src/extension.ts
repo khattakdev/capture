@@ -55,7 +55,7 @@ export function activate(context: vscode.ExtensionContext) {
               vscode.window.showErrorMessage("Failed to save imaged!");
             } else {
               copyImg(fileUri.fsPath);
-              vscode.window.showInformationMessage("Image saved and Copied to Clipboard!");
+              vscode.window.showInformationMessage("Image saved and copied to clipboard!");
             }
           });
         }
