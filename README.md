@@ -20,6 +20,10 @@ You can take the code snapshot in two steps:
 
 ## Contributing
 
+See [the contributing guide](CONTRIBUTING.md) for detailed instructions on how to get started with our project.
+We accept different types of contributions, including some that don't require you to write a single line of code.
+If you're looking for a way to contribute, you can scan through our [existing issues](https://github.com/khattakdev/capture/issues) for something to work on. When ready, check out [Getting Started with Contributing](CONTRIBUTING.md) for detailed instructions.
+
 ### Layout
 
 - `.vscode`:
