@@ -5,7 +5,7 @@ const highlightCode = async (themeName: string) => {
     theme: themeName, // You can specify other themes like 'dark-plus', 'light-plus', etc.
   });
 
-  return await highlighter;
+  return highlighter;
 };
 
 const generateTemplate = async (content: string, themeName: string) => {
