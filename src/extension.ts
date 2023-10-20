@@ -31,8 +31,10 @@ export function activate(context: vscode.ExtensionContext) {
         return;
       } 
         
+      const configuration = vscode.workspace.getConfiguration('capture');
+      const themeName = configuration.get('themeName', 'one-dark-pro');
 
-      const content = await generateTemplate(text);
+      const content = await generateTemplate(text,themeName);
       await page.setContent(content);
       const contentHeight = content.split("\n").length;
       const totalHeight = contentHeight * 3;
