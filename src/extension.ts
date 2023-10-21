@@ -4,6 +4,7 @@ import * as vscode from "vscode";
 import * as fs from "fs";
 import * as puppeteer from "puppeteer";
 import generateTemplate from "./template";
+const { copyImg } = require('img-clipboard');
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -24,10 +25,18 @@ export function activate(context: vscode.ExtensionContext) {
         const selection = editor.selection;
         const text = document.getText(selection);
 
+        if (text.trim() === "") {
+          vscode.window.showErrorMessage("You have not highlighted anything.");
+          return;
+        } 
+        
         const browser = await puppeteer.launch();
         const page = await browser.newPage();
 
-        const content = await generateTemplate(text);
+        const configuration = vscode.workspace.getConfiguration('capture');
+        const themeName = configuration.get('themeName', 'one-dark-pro');
+
+        const content = await generateTemplate(text,themeName);
         await page.setContent(content);
         const contentHeight = content.split("\n").length;
         const totalHeight = contentHeight * 3;
@@ -53,7 +62,8 @@ export function activate(context: vscode.ExtensionContext) {
             if (err) {
               vscode.window.showErrorMessage("Failed to save imaged!");
             } else {
-              vscode.window.showInformationMessage("Image saved!");
+              copyImg(fileUri.fsPath);
+              vscode.window.showInformationMessage("Image saved and copied to clipboard!");
             }
           });
         }
