@@ -39,3 +39,6 @@ If you're looking for a way to contribute, you can scan through our [existing is
 - `src/test`:
   - This directory contains any tests for your extension.
   - It usually includes a suite folder with extension test files.
+ 
+### Discord
+Join our community on [Discord](http://discord.devsdope.com/)
