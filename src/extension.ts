@@ -16,65 +16,68 @@ export function activate(context: vscode.ExtensionContext) {
   // The command has been defined in the package.json file
   // Now provide the implementation of the command with registerCommand
   // The commandId parameter must match the command field in package.json
-  let disposable = vscode.commands.registerCommand(
-    "capture.snapshot",
-    async () => {
-      const editor = vscode.window.activeTextEditor;
-      if (editor) {
-        const document = editor.document;
-        const selection = editor.selection;
-        const text = document.getText(selection);
+  let disposable = vscode.commands.registerCommand("capture.snapshot", async () => {
+    const editor = vscode.window.activeTextEditor;
+    if (editor) {
+      const document = editor.document;
+      const selection = editor.selection;
+      const text = document.getText(selection);
 
-        if (text.trim() === "") {
-          vscode.window.showErrorMessage("You have not highlighted anything.");
-          return;
-        } 
+      const browser = await puppeteer.launch();
+      const page = await browser.newPage();
+
+      if (text.trim() === "") {
+        vscode.window.showErrorMessage("You have not highlighted anything.");
+        return;
+      } 
         
-        const browser = await puppeteer.launch();
-        const page = await browser.newPage();
+      const configuration = vscode.workspace.getConfiguration('capture');
+      const themeName = configuration.get('themeName', 'one-dark-pro');
 
-        const configuration = vscode.workspace.getConfiguration('capture');
-        const themeName = configuration.get('themeName', 'one-dark-pro');
+      const content = await generateTemplate(text,themeName);
+      await page.setContent(content);
+      const contentHeight = content.split("\n").length;
+      const totalHeight = contentHeight * 3;
+      await page.setViewport({
+        width: 800,
+        height: totalHeight + 50,
+      });
+      const imageBuffer = await page.screenshot({
+        fullPage: true,
+      });
 
-        const content = await generateTemplate(text,themeName);
-        await page.setContent(content);
-        const contentHeight = content.split("\n").length;
-        const totalHeight = contentHeight * 3;
-        await page.setViewport({
-          width: 800,
-          height: totalHeight + 50,
+      // Show a save dialog to choose the image file location
+      const fileUri = await vscode.window.showSaveDialog({
+        filters: {
+          images: ["png"],
+        },
+        saveLabel: "Save Image",
+        title: "Save Code Snippet Image",
+      });
+
+      if (fileUri) {
+        fs.writeFile(fileUri.fsPath, imageBuffer, (err) => {
+          if (err) {
+            vscode.window.showErrorMessage("Failed to save image!");
+          } else {
+            // Create a vscode.Uri for the saved image
+            const imageUri = vscode.Uri.file(fileUri.fsPath);
+            // copy to clipboard
+            copyImg(fileUri.fsPath);
+            // Show an information message with a clickable link to open the image
+            vscode.window.showInformationMessage("Image saved and copied to clipboard. Click to open.", "Open Image").then((choice) => {
+              if (choice === "Open Image") {
+                vscode.env.openExternal(imageUri);
+              }
+            });
+          }
         });
-        const imageBuffer = await page.screenshot({
-          fullPage: true,
-        });
-
-        const fileUri = await vscode.window.showSaveDialog({
-          filters: {
-            // eslint-disable-next-line @typescript-eslint/naming-convention
-            Images: ["png"],
-          },
-          saveLabel: "Save Image",
-          title: "Save Code Snippet Image",
-        });
-
-        if (fileUri) {
-          fs.writeFile(fileUri.fsPath, imageBuffer, (err) => {
-            if (err) {
-              vscode.window.showErrorMessage("Failed to save imaged!");
-            } else {
-              copyImg(fileUri.fsPath);
-              vscode.window.showInformationMessage("Image saved and copied to clipboard!");
-            }
-          });
-        }
-        await browser.close();
-        // vscode.window.showInformationMessage("Snapshot taken!");
       }
-      // The code you place here will be executed every time your command is executed
-      // Display a message box to the user
+      await browser.close();
     }
-  );
+  });
 
+  // Add the command to the context subscriptions
   context.subscriptions.push(disposable);
 }
 
