@@ -1,7 +1,7 @@
 # Capture
 
 A VS Code plugin that generates a screenshot of the highlighted content.
-![demo - how to capture](/assets/preview.gif)
+![demo - how to capture](./assets/preview.gif)
 
 # Getting Started
 
@@ -42,3 +42,9 @@ If you're looking for a way to contribute, you can scan through our [existing is
  
 ### Discord
 Join our community on [Discord](http://discord.devsdope.com/)
+
+### Show your support
+Give a ⭐️ if this project helped you!
+
+### License
+This project is [MIT](https://github.com/khattakdev/capture/blob/main/LICENSE.md) licensed.
