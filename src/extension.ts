@@ -46,6 +46,10 @@ export function activate(context: vscode.ExtensionContext) {
         fullPage: true,
       });
 
+      const now = new Date();
+      const dateAndTime = now.toISOString().replace(/[:.]/g, "-"); // Format the date and time
+      const defaultFileName = `capture_${dateAndTime}.png`; 
+
       // Show a save dialog to choose the image file location
       const fileUri = await vscode.window.showSaveDialog({
         filters: {
@@ -53,6 +57,7 @@ export function activate(context: vscode.ExtensionContext) {
         },
         saveLabel: "Save Image",
         title: "Save Code Snippet Image",
+        defaultUri: vscode.Uri.file(defaultFileName),
       });
 
       if (fileUri) {
